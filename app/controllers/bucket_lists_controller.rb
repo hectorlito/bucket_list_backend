@@ -5,12 +5,12 @@ class BucketListsController < ApplicationController
   def index
     @bucket_lists = BucketList.all
 
-    render json: @bucket_lists
+    render json: @bucket_lists.to_json(include: [:user, :list_item])
   end
 
   # GET /bucket_lists/1
   def show
-    render json: @bucket_list
+    render json: @bucket_list.to_json(include: [:user, :list_item])
   end
 
   # POST /bucket_lists
