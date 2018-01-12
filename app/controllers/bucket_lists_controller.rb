@@ -18,7 +18,7 @@ class BucketListsController < ApplicationController
     @bucket_list = BucketList.new(bucket_list_params)
 
     if @bucket_list.save
-      render json: @bucket_list, status: :created, location: @bucket_list
+      render json: @bucket_list, status: :created
     else
       render json: @bucket_list.errors, status: :unprocessable_entity
     end
