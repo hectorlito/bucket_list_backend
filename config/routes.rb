@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   root 'root#index'
-  resources :bucket_lists
-  resources :list_items
-  resources :users
+  resources :bucket_lists, only: [:destroy]
+  resources :list_items, except: [:destroy]
+  resources :users, only: [:show, :create] do
+    resources :bucket_lists, only: [:create]
+  end
 end
