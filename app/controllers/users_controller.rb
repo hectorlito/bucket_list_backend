@@ -13,8 +13,8 @@ class UsersController < ApplicationController
 
   # GET /users/1
   def show
-    # render json: get_current_user
-    render json: @user.to_json(include: :list_items)
+    render json: get_current_user
+    @user.to_json(include: :list_items)
   end
 
   # POST /users
