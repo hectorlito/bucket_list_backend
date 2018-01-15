@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[show update]
-  before_action :authenticate_token, except: [:login, :create]
-  before_action :authorize_user, except: [:login, :create, :index]
+  before_action :authenticate_token, except: [:login, :create, :show]
+  before_action :authorize_user, except: [:login, :create, :index, :show]
 
 
   # GET /users
@@ -13,8 +13,8 @@ class UsersController < ApplicationController
 
   # GET /users/1
   def show
-    render json: get_current_user
-    # @user.to_json(include: :list_items)
+    # render json: get_current_user
+    render json: @user.to_json(include: :list_items)
   end
 
   # POST /users
@@ -46,14 +46,6 @@ class UsersController < ApplicationController
       render json: { status: 401, message: 'Unauthorized' }
     end
 end
-
-# def authorize_user
-#   puts "Authorize USER"
-#   puts "user id: #{get_current_user.id}"
-#   puts "params: #{params[:id]}"
-#   render json: { status: 401, message: "Unauthorized" } unless get_current_user.id == params[:id].to_i
-#
-# end
 
 private
 
