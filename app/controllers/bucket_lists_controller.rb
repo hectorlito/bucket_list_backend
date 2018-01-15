@@ -1,5 +1,5 @@
 class BucketListsController < ApplicationController
-  before_action :set_bucket_list, only: [:destroy]
+  before_action :set_bucket_list, only: [:show, :destroy]
   # before_action :set_bucket_list, only: [:show, :update, :destroy]
 
   # GET /bucket_lists
@@ -10,9 +10,9 @@ class BucketListsController < ApplicationController
   end
 
   # GET /bucket_lists/1
-  # def show
-  #   render json: @bucket_list.to_json(include: [:user, :list_item])
-  # end
+  def show
+    render json: @bucket_list.to_json(include: [:user, :list_item])
+  end
 
   # POST /bucket_lists
   def create
@@ -27,13 +27,13 @@ class BucketListsController < ApplicationController
   end
 
   # PATCH/PUT /bucket_lists/1
-  # def update
-  #   if @bucket_list.update(bucket_list_params)
-  #     render json: @bucket_list
-  #   else
-  #     render json: @bucket_list.errors, status: :unprocessable_entity
-  #   end
-  # end
+  def update
+    if @bucket_list.update(bucket_list_params)
+      render json: @bucket_list
+    else
+      render json: @bucket_list.errors, status: :unprocessable_entity
+    end
+  end
 
   # DELETE /bucket_lists/1
   def destroy
