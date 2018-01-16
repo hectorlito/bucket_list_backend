@@ -4,20 +4,22 @@ class BucketListsController < ApplicationController
 
   # GET /bucket_lists
   def index
-    @bucket_lists = BucketList.all
+    @bucket_lists = User.find(params[:user_id]).bucket_lists
 
     render json: @bucket_lists.to_json(include: [:user, :list_item])
+
   end
 
   # GET /bucket_lists/1
   def show
     render json: @bucket_list.to_json(include: [:user, :list_item])
+
   end
 
   # POST /bucket_lists
   def create
     @bucket_list = BucketList.new(bucket_list_params)
-    @bucket_list.user_id = params[:user_id]
+    # @bucket_list.user_id = params[:user_id]
 
     if @bucket_list.save
       render json: @bucket_list, status: :created
