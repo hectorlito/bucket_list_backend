@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :bucket_lists, only: [:create, :destroy, :show]
   resources :list_items, except: [:destroy]
 
-  resources :users, only: [:show, :create, :update] do
+  resources :users, only: [:show, :create, :update, :index] do
 
     collection do
       post '/login', to: 'users#login'
