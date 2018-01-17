@@ -42,6 +42,21 @@ class BucketListsController < ApplicationController
     @bucket_list.destroy
   end
 
+
+  def completed
+    @bucket_lists = User.find(params[:user_id]).bucket_lists.where('completed'=true)
+
+    render json: @bucket_lists.to_json(include: [:user, :list_item])
+  end
+
+
+  def todo
+    @bucket_lists = User.find(params[:user_id]).bucket_lists.where('completed'=false)
+
+    render json: @bucket_lists.to_json(include: [:user, :list_item])
+  end
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_bucket_list
