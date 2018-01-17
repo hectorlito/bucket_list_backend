@@ -8,7 +8,7 @@
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
     origins 'https://bucket-list-app-frontend.herokuapp.com'
-    # 'https://bucket-list-app-frontend.herokuapp.com/list_items'
+
     resource '*',
       headers: :any,
       methods: [:get, :post, :put, :patch, :delete, :options, :head]
