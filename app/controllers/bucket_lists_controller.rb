@@ -44,14 +44,14 @@ class BucketListsController < ApplicationController
 
 
   def completed
-    @bucket_lists = User.find(params[:user_id]).bucket_lists.where('completed'=true)
+    @bucket_lists = User.find(params[:user_id]).bucket_lists.where('completed': true)
 
     render json: @bucket_lists.to_json(include: [:user, :list_item])
   end
 
 
   def todo
-    @bucket_lists = User.find(params[:user_id]).bucket_lists.where('completed'=false)
+    @bucket_lists = User.find(params[:user_id]).bucket_lists.where('completed': false)
 
     render json: @bucket_lists.to_json(include: [:user, :list_item])
   end
@@ -65,6 +65,6 @@ class BucketListsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def bucket_list_params
-      params.require(:bucket_list).permit(:user_id, :list_item_id)
+      params.require(:bucket_list).permit(:user_id, :list_item_id, :completed)
     end
 end
