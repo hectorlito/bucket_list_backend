@@ -1,6 +1,5 @@
 class BucketListsController < ApplicationController
   before_action :set_bucket_list, only: [:show, :update, :destroy]
-  # before_action :set_bucket_list, only: [:show, :update, :destroy]
 
   # GET /bucket_lists
   def index
