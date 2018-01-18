@@ -1,5 +1,5 @@
 class BucketListsController < ApplicationController
-  before_action :set_bucket_list, only: [:show, :destroy]
+  before_action :set_bucket_list, only: [:show, :update, :destroy]
   # before_action :set_bucket_list, only: [:show, :update, :destroy]
 
   # GET /bucket_lists
@@ -42,6 +42,21 @@ class BucketListsController < ApplicationController
     @bucket_list.destroy
   end
 
+
+  def completed
+    @bucket_lists = User.find(params[:user_id]).bucket_lists.where('completed': true)
+
+    render json: @bucket_lists.to_json(include: [:user, :list_item])
+  end
+
+
+  def todo
+    @bucket_lists = User.find(params[:user_id]).bucket_lists.where('completed': false)
+
+    render json: @bucket_lists.to_json(include: [:user, :list_item])
+  end
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_bucket_list
@@ -50,6 +65,6 @@ class BucketListsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def bucket_list_params
-      params.require(:bucket_list).permit(:user_id, :list_item_id)
+      params.require(:bucket_list).permit(:user_id, :list_item_id, :completed)
     end
 end
